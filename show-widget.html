@@ -1,17 +1,32 @@
 <html>
 <head>
-<script type="text/javascript" src="script/libs/jquery-1.7.js"></script>
-<script type="text/javascript" src="script/libs/jquery-ui-1.8.16.custom.min.js"></script>
+
+<!-- external library -->
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
+<script type="text/javascript" src="bower_components/jquery.ui/ui/widget.js"></script>
 <script type="text/javascript" src="script/libs/jquery.tmpl.js"></script>
 <script type="text/javascript" src="https://public.tableausoftware.com/javascripts/api/tableau_v8.debug.js"></script>
 <script type="text/javascript" src="script/libs/underscore.js"></script>
 <script type="text/javascript" src="script/libs/pubsub.js"></script>
-<script type="text/javascript" src="script/test.js"></script>
-<script type="text/javascript" src="script/testmodule.js"></script>
-<script type="text/javascript" src="script/testui.testwidget.js"></script>
+
+<script type="text/javascript" src="script/app.js"></script>
+
+<!-- widget -->
+<script type="text/javascript" src="script/widget/tableau.checkboxWidget.js"></script>
+<script type="text/javascript" src="script/widget/tableau.selectWidget.js"></script>
+<script type="text/javascript" src="script/widget/tableau.radioWidget.js"></script>
+
+<!-- manager -->
+<script type="text/javascript" src="script/widgetManager.js"></script>
+<script type="text/javascript" src="script/infoManager.js"></script>
+<script type="text/javascript" src="script/interactionManager.js"></script>
+
+
+
+
 <script type="text/javascript">
   $(function(){
-	$.test.init();
+	$.app.init();
   });
 </script>
 </head>
