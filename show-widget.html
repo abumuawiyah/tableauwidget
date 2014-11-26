@@ -1,9 +1,11 @@
+<!DOCTYPE html>
 <html>
 <head>
 
 <!-- external library -->
 <script type="text/javascript" src="bower_components/jquery/dist/jquery.js"></script>
 <script type="text/javascript" src="bower_components/jquery.ui/ui/widget.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script type="text/javascript" src="script/libs/jquery.tmpl.js"></script>
 <script type="text/javascript" src="https://public.tableausoftware.com/javascripts/api/tableau_v8.debug.js"></script>
 <script type="text/javascript" src="script/libs/underscore.js"></script>
@@ -22,7 +24,8 @@
 <script type="text/javascript" src="script/interactionManager.js"></script>
 
 
-
+<link href="bower_components/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+<link href="style/custom-style.css" rel="stylesheet">
 
 <script type="text/javascript">
   $(function(){
@@ -31,7 +34,12 @@
 </script>
 </head>
 <body>
-	<h1>My personal jQuery UI Widget</h1>
-	<div id="test-element"></div>    
+	<div class="container-fluid">
+        <h1>Tableau widget</h1>
+        <p>Tableau widget developed using <kbd>jQuery</kbd>, <kbd>jQuery.ui</kbd> and <kbd>bootstrap</kbd></p>
+        <p><button type="button" class="btn btn-success clear-filter">Clear Filter</button></p>
+        <hr></hr>
+    	<div id="tableauWidget"></div>  
+    </div>
 </body>
 </html>

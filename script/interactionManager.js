@@ -1,6 +1,6 @@
 ;jQuery.interactionManager = (function($){
     var _element;
-    var _markup = '<div id="tableauViz"></div>';    
+    var _markup = '<div id="tableauViz" class="container"></div>';    
     
     var _bindEvents = function(){
 	
@@ -48,7 +48,6 @@
                             response.forEach(function(data, idx){ 
                                 if(data.getFilterType() === 'categorical'){
                                     var interactionInfo = $.infoManager.interaction.get();
-                                    console.log('interaction', interactionInfo[idx]);
                                     $.widgetManager.create({
                                         type: data.getFilterType(),
                                         appliedValues: data.getAppliedValues(),

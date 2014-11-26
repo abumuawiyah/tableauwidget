@@ -6,9 +6,9 @@ $.widget('tableau.selectWidget',{
             add: 'ADD',
             remove: 'REMOVE'
         },
-        template: '<select class="selectWidget">\
-                {{each appliedValues}}<option value="${this.value}">${this.formattedValue}</option><br />{{/each}}\
-            </select>'
+        template: '<select class="form-control selectWidget">\
+                        {{each appliedValues}}<option value="${this.value}">${this.formattedValue}</option><br />{{/each}}\
+                    </select>'
                         
     },
     _create: function(){
@@ -23,10 +23,10 @@ $.widget('tableau.selectWidget',{
         this.unbindEvents();
     },
     unbindEvents:function(){
-        $( 'select' ).off( 'change', this, this.onChange );
+        this.element.find( 'select.selectWidget' ).off( 'change', this, this.onChange );
     },
     bindEvents:function(){  
-        $( 'select' ).on( 'change', this, this.onChange );
+        this.element.find( 'select.selectWidget' ).on( 'change', this, this.onChange );
     },
     onChange:function(event){
         var $target = $(event.currentTarget),

@@ -7,7 +7,16 @@ $.widget('tableau.checkboxWidget',{
             add: 'ADD',
             remove: 'REMOVE'
         },
-        template: '{{each appliedValues}}<input type="checkbox" class="test" value="${this.value}">${this.formattedValue}</input><br />{{/each}}'
+        template: '<form role="form">\
+                    {{each appliedValues}}\
+                        <div class="checkbox">\
+                          <label>\
+                            <input type="checkbox" value="${this.value}">\
+                                ${this.formattedValue}\
+                          </label>\
+                        </div>\
+                    {{/each}}\
+                   </form>',
                         
     },
     _create: function(){
@@ -22,18 +31,25 @@ $.widget('tableau.checkboxWidget',{
         this.unbindEvents();
     },
     unbindEvents:function(){
-        $( 'input[type="checkbox"]' ).off( "click", this, this.onChecked );
+        this.element.find( 'input[type="checkbox"]' ).off( "click", this, this.onChecked );
     },
     bindEvents:function(){ 
-        $( 'input[type="checkbox"]' ).on( "click", this, this.onChecked );
+        this.element.find( 'input[type="checkbox"]' ).on( "click", this, this.onChecked );
     },
     onChecked:function(event){
         var $target = $(event.currentTarget),
+            isChecked = $target.is(':checked'),
             widget = event.data;
 
-        widget.options.element = $target.parent();
-        widget.options.filterVals.push($target.val());
-        widget.onFilter();
+        if (isChecked) {
+            widget.options.filterVals.push($target.val());
+            widget.onFilter();
+        } else {
+            widget.removeValuesFromFilter($target.val(), widget.options.filterEnum.remove);
+            widget.options.filterVals = $.grep(widget.options.filterVals, function(value){
+                return value != $target.val();
+            });
+        }       
     },
     onFilter:function(){
         var filterVals = this.options.filterVals,
@@ -49,7 +65,7 @@ $.widget('tableau.checkboxWidget',{
         var activeSheet = $.interactionManager.activeSheet.get();
 
         activeSheet.applyFilterAsync(
-            this.options.element.data('name'),
+            this.options.fieldName,
             val,
             tableauSoftware.FilterUpdateType[type]
         );
@@ -64,8 +80,14 @@ $.widget('tableau.checkboxWidget',{
             tableauSoftware.FilterUpdateType[type]
         );
     },
-    removeValuesFromFilter:function(){
+    removeValuesFromFilter:function(val, type){
+        var activeSheet = $.interactionManager.activeSheet.get();
 
+        activeSheet.applyFilterAsync(
+            this.options.fieldName,
+            val,
+            tableauSoftware.FilterUpdateType[type]
+        );
     },
     render:function(){      
         $.tmpl(this.options.template,this.options).appendTo(this.element);

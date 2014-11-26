@@ -6,7 +6,12 @@ $.widget('tableau.radioWidget',{
             add: 'ADD',
             remove: 'REMOVE'
         },
-        template: '{{each appliedValues}}<input name="radioWidget" type="radio" value="${this.value}">${this.formattedValue}</input><br />{{/each}}'
+        template: '{{each appliedValues}}<div class="radio">\
+                      <label>\
+                        <input type="radio" name="radioWidget" value="${this.value}">\
+                            ${this.formattedValue}\
+                      </label>\
+                    </div>{{/each}}',
                         
     },
     _create: function(){
@@ -30,7 +35,6 @@ $.widget('tableau.radioWidget',{
         var $target = $(event.currentTarget),
             widget = event.data;
 
-        widget.options.element = $target.parent();
         widget.onFilter($target.val());
     },
     //for radio it's 1 value only
@@ -43,7 +47,7 @@ $.widget('tableau.radioWidget',{
         var activeSheet = $.interactionManager.activeSheet.get();
 
         activeSheet.applyFilterAsync(
-            this.options.element.data('name'),
+            this.options.fieldName,
             val,
             tableauSoftware.FilterUpdateType[type]
         );
@@ -51,7 +55,7 @@ $.widget('tableau.radioWidget',{
     removeValuesFromFilter:function(){
         var activeSheet = $.interactionManager.activeSheet.get();
 
-        activeSheet.clearFilterAsync(this.options.element.data('name'));
+        activeSheet.clearFilterAsync(this.options.fieldName);
     },
     render:function(){      
         $.tmpl(this.options.template,this.options).appendTo(this.element);
