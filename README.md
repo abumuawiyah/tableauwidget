@@ -16,9 +16,9 @@ Bower has been used for library management.
 $.infoManager can be used by the user/dev to study the filters data and decide what kind of HTML element that they want the widget to be displayed
 ```
 **Custom Widget**
-* tableau.**checkbox**Widget
-* tableau.**radio**Widget
-* tableau.**select**Widget
+* tableau._checkbox_Widget
+* tableau._radio_Widget
+* tableau._select_Widget
 
 ```
 you can customize a new widget using widget factory $.widget
